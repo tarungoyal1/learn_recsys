@@ -1,0 +1,112 @@
+Course outline:
+
+1. evaluating recommender systems
+2. building a recommendation engine
+3. content-based filtering
+4. neighborhood-based collaborative filtering
+5. model-based methods
+6. recommendations with deep learning
+7. scaling up
+8. challenges of recommender systems
+9. case studies
+10. hybrid solutions
+
+-----------------------
+
+ Recommendation systems find relationships between users and items just based on past actions(patterns).
+
+ What you can recommend with recommender systems:
+ Things (products)
+ Content (news, articles, videos, etc.)
+ Music
+ People
+ Search results (personalized)(based on location, budget, etc.)
+
+ ----------------------------------------------------------------------------------------
+
+How does the recommendation system works in general?
+
+ It comes down to understanding the USER as much as possible.
+ Goal is to start with some dat to  find user's individual tastes and interests and merge it with the collective
+ behavior of everyone else like you to recommend stuff you might like.
+
+ Use this data to build up a profile of that user's interest.
+
+But how and where this data come from?
+
+ 2 potential ways:
+
+ 1- Explicit feedback(explicit behavior)
+    ratings(on a scale of 1 to 5)
+    like/dislike
+    submit reviews
+
+    The downside of this approach is that it asks user to do extra work,
+    hence, the data will be sparse and lead to low quality recommendations.
+
+    Another problem with this is, everyone has different standards.
+    Everyone is different geographically, culturaly, etc.
+    Means, 4 star review of same thing will mean different opinions from one person to the other.
+
+ 2- Implicit feedback(implicit behavior)
+    things you click (large data but not necessarily a reliable indicator of interest)
+    things you purchase (better indication of interest as you spent your hard earned money)
+    things you consume (minutes watched on a youtube video)(better indication than click data as you spent your time)
+
+    Note: Youtube takes minutes watched heavily in recommendation algorithms.
+
+----------------------------------------------------------------------------------------
+
+Top-N recommender architecture
+
+If your recommender systems gives 100 recommendations, then N=100 here.
+
+You can choose how you display those 100 results, 20 results per page for 5 pages, or whatever.
+
+Note: User doesn't really care about your ability to predict things, they only care about best & relevant recommendations
+that they will love or even buy.
+
+
+A typical architecture of item-based collaborative filtering recSys:
+Step by step:
+
+1: First step is to generate recommendation candidates, items we(as developers) think might be interesting to the user based
+   on their past behavior.
+   So the candidate generation phase might take all the items a user indicated interest in before, and consult another datastore
+   (db or table) of items that are similar to those items based on aggregate behavior.
+
+   In the process of building recommendation candidates, I might assign a score to each item based on
+    -how i rated the items they came from, and
+    -how strong the similarities are between item and the candidates that came from them.
+
+   I might filter out the results, if the score isn't high enough.
+
+
+2:  Next step is candidate ranking:
+    Many candidates will possibly appear more than once, may be combined together in some way.
+    Maybe by boosting their score since they keep coming up repeatedly.
+    There are many complex approaches exists such as finding the optimal ranking of candidates at this stage using ML or sth.
+    This ranking stage will need to have access to more information about the recommendation candidates such as average review
+    scores, etc. to boost the rankings for highly-rated or popular candidates.
+
+3: Final step is filtering the candidates
+    -Some sort of filtering may be required such as sorting the results(based on ranks, hits, likes, etc.) before presenting to the user.(optional)
+    -We might potentially need to eliminate the candidates that user has already rated, liked or seen. Since, we might only need to show recommendation
+     that user has yet not seen or explored.
+    -We might also need to apply a stop-list for items that are potentially offensive to the user, or that are below the minimmum quality score
+     or minimum rating threshold.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
