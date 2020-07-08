@@ -70,7 +70,7 @@ that they will love or even buy.
 A typical architecture of item-based collaborative filtering recSys:
 Step by step:
 
-1: First step is to generate recommendation candidates, items we(as developers) think might be interesting to the user based
+1: First step is to generate recommendation candidates, the items we(as developers) think might be interesting to the user based
    on their past behavior.
    So the candidate generation phase might take all the items a user indicated interest in before, and consult another datastore
    (db or table) of items that are similar to those items based on aggregate behavior.
@@ -95,6 +95,105 @@ Step by step:
      that user has yet not seen or explored.
     -We might also need to apply a stop-list for items that are potentially offensive to the user, or that are below the minimmum quality score
      or minimum rating threshold.
+
+
+-----------------------------------------------------MODULE 3-------------------------------------------------------------------------------------------
+
+Again, remember our ultimate goal is not test how well the recommendation system predicts the ratings instead it is to create a recommendation system
+that recommends best items to presented in front of the user and how user reacts against them.
+
+
+There are many ways to evaluate a recommendation system, let's discuss few of them:
+
+1: Train Test
+    Here, there is training set of data (usually bigger) and testing set.
+    The recommendation system is trained against the training set of data and then testing against testing set.
+    Accuracy is measured as the ability to predict the ratings of new user over items that he has not rated yet.
+
+2: k-fold cross validation
+   Here, there are k number of folds(training sets)(equal sizes) are created to train the system and the testing set is used
+   to test the system for each fold.
+   Accuracy is measured for each individual fold for it's ability to predict the ratings as in the above case.
+
+
+
+Accuracy metrices:
+
+Mean absoulte error (MAE) : Sum of absolute difference between predicted rating and actual rating divided by total no. of ratings to get the mean difference.
+                            It's the sum of errors, so lower the mean, the better.
+
+Root mean square error (RMSE):
+
+------------------------------
+
+IMP:
+Evaluating top-n recommendation system (offline):
+
+Hit rate:  If a item that your recsys gave as recommendation and the user actually gave a rating in test set, then it's a hit
+            Hit rate = hits/users(in test set)
+
+
+Leave-one-out cross validation:
+
+Average reciprocal hit rate(ARHR):
+
+Cumulative hit rate(cHR):
+
+Rating hit rate:
+
+-----------------------------
+Along with accuracy, we can measure few other important things such as Coverage, Diversity and Novelty.
+
+** Coverage **:
+
+% of <user, item> pairs that can be predicted.
+
+Your dataset may not contain items that exists in real world but in the dataset.
+For.e.g If you've a dataset of movies of one hundred thousands and use the recSys created using it over IMDB that millions other movies,
+the coverage of this recSys will be low.
+
+Also, coverage is important to watch how newly added item appears in the recommendations.
+E.g A new book comes on Amazon can't be recommended until few people buy it means there must exists some patterns.
+
+
+** Diversity **:
+
+(1-S), where S is the average similarity between recommendations pairs.
+
+
+** Novelty **:
+
+a measure of how popular the items are in your recommendations.
+
+These measures can be certainly achieved by lil bit tweaking of the algo, but you should keep a balance between trust and novelty.
+The familiar items builds the trust in user and new ones allow them to discover/explore the entire different things.
+
+There is concept of user trust in recSys, which states, user should see atleast few items that make them believe that the system know them.
+
+
+** Churn **:
+
+It's a measure of how often do the recommendations for a user change?
+
+Churns determines how sensitive your recommendation system is to a new user behavior.
+
+** Responsiveness **:
+
+how quickly(time) does new user behavior influences your recommendations.
+
+-------------------------------------------------------------------
+
+These all are the tools for measuring the accuracy or quality of recommendations in offline settings, though things don't work out the same way
+in online settings, that is, the real world.
+
+Then the only good way for online evaluation with your real users is A/B tests.
+
+
+--------------------------------------------------------------------
+
+
+
+
 
 
 
